@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import { useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
+import { user } from "../redux/reducers/userReducer";
 import { decryptPassword } from "../utils/decryption";
 
 const PasswordComponent: React.FC<RouteComponentProps> = ({
@@ -9,13 +11,11 @@ const PasswordComponent: React.FC<RouteComponentProps> = ({
 }: RouteComponentProps) => {
   const [appName, setAppName] = useState("app name");
   const [passwd, setPasswd] = useState("******************");
-  const [userPwd, setUserPwd] = useState("");
+  const password = useSelector((state: user) => state.password);
   const buttonRef = useRef(null);
 
   useEffect(() => {
-    console.log(location.state);
-    setUserPwd("location.state.hash");
-    setAppName("location.state.appData.appName");
+    setAppName(location.state["appData"]["appname"]);
   }, [location]);
 
   const getPassword = () => {
@@ -25,8 +25,8 @@ const PasswordComponent: React.FC<RouteComponentProps> = ({
   const showAndHidePassword = () => {
     if (passwd === "******************") {
       const pwd = decryptPassword(
-        location.state["appData"]["encryptedPassword"],
-        userPwd
+        location.state["appData"]["password"],
+        password
       );
       setPasswd(pwd);
       buttonRef.current.innerHTML = "Hide Password";

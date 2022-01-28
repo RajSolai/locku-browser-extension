@@ -1,6 +1,8 @@
 import axios from "axios";
+import { getAppsUrl } from "./urls";
 
-export const loadApps = async (ownerId) => {
-  const response = await axios.get(`http://localhost:5555/getApps/${ownerId}`);
-  return response.data.apps;
+export const loadApps = async (ownerId: string) => {
+  const doc = { email: ownerId };
+  const response = await axios.post(getAppsUrl, doc);
+  return response.data["msg"] || [];
 };

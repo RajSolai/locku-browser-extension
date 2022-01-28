@@ -4,8 +4,11 @@ import { useDispatch } from "react-redux";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { userLogin } from "../redux/actions/userLogin";
 import { user } from "../redux/reducers/userReducer";
+import { loginUrl } from "../utils/urls";
 
-const LoginComponent: React.FC<RouteComponentProps> = ({ history }:RouteComponentProps) => {
+const LoginComponent: React.FC<RouteComponentProps> = ({
+  history,
+}: RouteComponentProps) => {
   const dispatch = useDispatch();
   const [password, setPasswd] = useState("");
   const [email, setMail] = useState("");
@@ -17,11 +20,12 @@ const LoginComponent: React.FC<RouteComponentProps> = ({ history }:RouteComponen
       password,
     };
     console.log(userData);
-    const response = await axios.post("http://localhost:5555/login", userData);
-    if (response.data !== "userLoginFailed") {
+    const response = await axios.post(loginUrl, userData);
+    console.log(response);
+    if (response.data["msg"] !== "login-fail") {
       const userObject: user = {
-        uid: response["data"]["uid"],
-        password: response["data"]["password"],
+        uid: email,
+        password: password,
       };
       dispatch(userLogin(userObject));
       history.push("/home");

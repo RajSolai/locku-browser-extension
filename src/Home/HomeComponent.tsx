@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { IoIosAdd, IoIosApps } from "react-icons/io";
-import { loadApps } from "../utils/getApps";
 import { RouteComponentProps } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { user } from "../redux/reducers/userReducer";
+import { loadApps } from "../utils/getApps";
 
 const HomeComponent: React.FC<RouteComponentProps> = ({
   history,
-  location,
 }: RouteComponentProps) => {
   const [apps, setApps] = useState([]);
+  const email = useSelector((state: user) => state.uid);
+  const password = useSelector((state: user) => state.password);
 
   useEffect(() => {
     getApps();
   }, []);
 
   const getApps = async () => {
-    const ownerId = location.state["uid"];
-    const apps = await loadApps("ownerId");
+    console.log(password, email);
+    const apps = await loadApps(email);
     setApps(apps);
-    console.log(ownerId);
+    console.log(apps);
   };
 
   const navigatePages = (appData) => {
@@ -25,7 +28,7 @@ const HomeComponent: React.FC<RouteComponentProps> = ({
   };
 
   const navigateToAddApps = () => {
-    // history.push("/addApp", { ...location.state });
+    history.push("/addApp");
   };
 
   return (
@@ -44,7 +47,7 @@ const HomeComponent: React.FC<RouteComponentProps> = ({
             <>
               <div className="app-card" onClick={() => navigatePages(app)}>
                 <IoIosApps size={40} />
-                <h3>{app.appName}</h3>
+                <h3>{app["appname"]}</h3>
               </div>
             </>
           ))

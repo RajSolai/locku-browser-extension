@@ -1,30 +1,27 @@
-import axios from "axios";
 import React, { useState, useRef } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import { useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
+import { user } from "../redux/reducers/userReducer";
+import { encryptAddApp } from "../utils/decryption";
 
 const Addapps: React.FC<RouteComponentProps> = ({
   history,
   location,
 }: RouteComponentProps) => {
+  const email = useSelector((state: user) => state.uid);
+  const password = useSelector((state: user) => state.password);
   const [appName, setAppName] = useState("");
   const [appPassword, setAppPwd] = useState("");
   const feedBackRef = useRef(null);
 
   const appApp = async () => {
-    const appData = {
-      appName,
-      appPassword,
-      owner: location.state["uid"],
-      hash: location.state["hash"],
-    };
-    const res = await axios.post("http://localhost:5555/addApps", appData);
-    console.log(res.data);
-    if (res.data === "appAdded") {
-      feedBackRef.current.innerHTML = "App added Successfully";
-    } else {
-      feedBackRef.current.innerHTML = "App addition Failed";
-    }
+    encryptAddApp(appPassword, appName, email, password);
+    // if (res.data === "appAdded") {
+    //   feedBackRef.current.innerHTML = "App added Successfully";
+    // } else {
+    //   feedBackRef.current.innerHTML = "App addition Failed";
+    // }
   };
 
   const navigateToHome = () => {
