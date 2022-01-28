@@ -1,8 +1,12 @@
 import React, { useEffect, useState, useRef } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import { RouteComponentProps } from "react-router-dom";
 import { decryptPassword } from "../utils/decryption";
 
-const PasswordComponent = ({ history, location }) => {
+const PasswordComponent: React.FC<RouteComponentProps> = ({
+  history,
+  location,
+}: RouteComponentProps) => {
   const [appName, setAppName] = useState("app name");
   const [passwd, setPasswd] = useState("******************");
   const [userPwd, setUserPwd] = useState("");
@@ -10,18 +14,18 @@ const PasswordComponent = ({ history, location }) => {
 
   useEffect(() => {
     console.log(location.state);
-    setUserPwd(location.state.hash);
-    setAppName(location.state.appData.appName);
+    setUserPwd("location.state.hash");
+    setAppName("location.state.appData.appName");
   }, [location]);
 
   const getPassword = () => {
-    decryptPassword(location.state.appData.encryptedPassword, userPwd);
+    // decryptPassword(location.state.appData.encryptedPassword, userPwd);
   };
 
   const showAndHidePassword = () => {
     if (passwd === "******************") {
       const pwd = decryptPassword(
-        location.state.appData.encryptedPassword,
+        location.state["appData"]["encryptedPassword"],
         userPwd
       );
       setPasswd(pwd);

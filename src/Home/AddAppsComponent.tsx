@@ -1,8 +1,12 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
 import { IoIosArrowBack } from "react-icons/io";
+import { RouteComponentProps } from "react-router-dom";
 
-const Addapps = ({ history, location }) => {
+const Addapps: React.FC<RouteComponentProps> = ({
+  history,
+  location,
+}: RouteComponentProps) => {
   const [appName, setAppName] = useState("");
   const [appPassword, setAppPwd] = useState("");
   const feedBackRef = useRef(null);

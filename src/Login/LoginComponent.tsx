@@ -1,11 +1,11 @@
 import axios from "axios";
 import React, { useState, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { Link, RouteComponentProps } from "react-router-dom";
 import { userLogin } from "../redux/actions/userLogin";
 import { user } from "../redux/reducers/userReducer";
 
-const LoginComponent = ({ history }) => {
+const LoginComponent: React.FC<RouteComponentProps> = ({ history }:RouteComponentProps) => {
   const dispatch = useDispatch();
   const [password, setPasswd] = useState("");
   const [email, setMail] = useState("");

@@ -14,10 +14,11 @@ export const decryptPassword = (
 
 export const addApp = (appPassword: string, usePassword: string) => {
   const encryptedPassword = encryptPassword(usePassword, appPassword);
-  //! TODO make a post to db 
+  //! TODO make a post to db
+  console.log(encryptedPassword);
 };
 
-const encryptPassword = (key, message) => {
+const encryptPassword = (key: string, message: string) => {
   let iv = key.substr(0, 16);
   const cipher = crypto.createCipheriv("aes-256-cbc", key, iv);
   const encryptedPassword =

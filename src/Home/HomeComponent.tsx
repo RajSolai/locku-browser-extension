@@ -1,8 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { IoIosAdd, IoIosApps } from "react-icons/io";
 import { loadApps } from "../utils/getApps";
+import { RouteComponentProps } from "react-router-dom";
 
-const HomeComponent = ({ history, location }) => {
+const HomeComponent: React.FC<RouteComponentProps> = ({
+  history,
+  location,
+}: RouteComponentProps) => {
   const [apps, setApps] = useState([]);
 
   useEffect(() => {
@@ -10,17 +14,18 @@ const HomeComponent = ({ history, location }) => {
   }, []);
 
   const getApps = async () => {
-    const ownerId = location.state.uid;
-    const apps = await loadApps(ownerId);
+    const ownerId = location.state["uid"];
+    const apps = await loadApps("ownerId");
     setApps(apps);
+    console.log(ownerId);
   };
 
   const navigatePages = (appData) => {
-    history.push("/password", { appData, ...location.state });
+    history.push("/password", { appData, change: "...location.state" });
   };
 
   const navigateToAddApps = () => {
-    history.push("/addApp", { ...location.state });
+    // history.push("/addApp", { ...location.state });
   };
 
   return (
