@@ -19,7 +19,7 @@ export const decryptPassword = (
   const decryptedPassword =
     decipher.update(encryptedMessage, "hex", "utf-8") + decipher.final("utf-8");
   console.log(decryptedPassword);
-  navigator.clipboard.writeText(decryptedPassword);
+  // navigator.clipboard.writeText(decryptedPassword);
   return decryptedPassword;
 };
 
