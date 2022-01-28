@@ -2,6 +2,7 @@ import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import React, { useState, useRef } from "react";
+import { registerUrl } from "../utils/urls";
 
 const RegisterComponent = () => {
   const [email, setEmail] = useState("");
@@ -15,19 +16,17 @@ const RegisterComponent = () => {
       feedbackRef.current.innerHTML = "Password Mismatch :(";
       return;
     }
-    if (email.length !== 0 && pwd.length !== 0 && confirmPwd.length !== 0) {
+    if (email.length === 0 || pwd.length === 0 || confirmPwd.length === 0) {
       feedbackRef.current.innerHTML = "Please enter all the fields !";
       return;
     }
     const userData = {
       email,
-      pwd,
+      password: pwd,
     };
-    const response = await axios.post(
-      "http://localhost:5555/register",
-      userData
-    );
-    if (response.data === "userCreated") {
+    const response = await axios.post(registerUrl, userData);
+    console.log(response);
+    if (response.data === "user-registered") {
       history.push("/login");
     }
   };
