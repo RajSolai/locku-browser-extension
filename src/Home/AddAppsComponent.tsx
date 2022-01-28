@@ -16,12 +16,12 @@ const Addapps: React.FC<RouteComponentProps> = ({
   const feedBackRef = useRef(null);
 
   const appApp = async () => {
-    encryptAddApp(appPassword, appName, email, password);
-    // if (res.data === "appAdded") {
-    //   feedBackRef.current.innerHTML = "App added Successfully";
-    // } else {
-    //   feedBackRef.current.innerHTML = "App addition Failed";
-    // }
+    const res = encryptAddApp(appPassword, appName, email, password);
+    if (res) {
+      feedBackRef.current.innerHTML = "App added Successfully";
+    } else {
+      feedBackRef.current.innerHTML = "App addition Failed";
+    }
   };
 
   const navigateToHome = () => {

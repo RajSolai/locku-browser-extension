@@ -40,6 +40,10 @@ export const encryptAddApp = async (
 
   console.log("encrypted pass", encryptedPassword);
   console.log(res.data);
+  if (res.data["msg"] == "added-app") {
+    return true;
+  }
+  return false;
 };
 
 const encryptPassword = (key: string, message: string) => {
