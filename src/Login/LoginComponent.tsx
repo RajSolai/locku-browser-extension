@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, RouteComponentProps } from "react-router-dom";
 import { userLogin } from "../redux/actions/userLogin";
+import { Player } from "@lottiefiles/react-lottie-player";
 import { user } from "../redux/reducers/userReducer";
 import { loginUrl } from "../utils/urls";
 
@@ -13,8 +14,10 @@ const LoginComponent: React.FC<RouteComponentProps> = ({
   const [password, setPasswd] = useState("");
   const [email, setMail] = useState("");
   const [feedback, setFeedback] = useState("");
+  const [isLoading, setLoading] = useState(false);
 
   const login = async () => {
+    setLoading(true);
     const userData = {
       email,
       password,
@@ -37,24 +40,40 @@ const LoginComponent: React.FC<RouteComponentProps> = ({
   return (
     <>
       <div className="login">
-        <h2>Login</h2>
-        <input
-          type="text"
-          onChange={(e) => setMail(e.target.value)}
-          className="text-box"
-          placeholder="Enter Email address"
-        />
-        <input
-          type="password"
-          onChange={(e) => setPasswd(e.target.value)}
-          className="text-box"
-          placeholder="Enter your Secret key"
-        />
-        <button onClick={login} className="btn">
-          Login
-        </button>
-        <p className="feedback bad-feedback">{feedback}</p>
-        <Link to="/register">New here ? Register now !</Link>
+        {isLoading ? (
+          <>
+            <div className="flex align-center items-center justify-center">
+              <div>
+                <Player
+                  autoplay
+                  loop
+                  src="https://assets10.lottiefiles.com/packages/lf20_F7WfWB.json"
+                ></Player>
+              </div>
+            </div>
+          </>
+        ) : (
+          <>
+            <h2>Login</h2>
+            <input
+              type="text"
+              onChange={(e) => setMail(e.target.value)}
+              className="text-box"
+              placeholder="Enter Email address"
+            />
+            <input
+              type="password"
+              onChange={(e) => setPasswd(e.target.value)}
+              className="text-box"
+              placeholder="Enter your Secret key"
+            />
+            <button onClick={login} className="btn">
+              Login
+            </button>
+            <p className="feedback bad-feedback">{feedback}</p>
+            <Link to="/register">New here ? Register now !</Link>
+          </>
+        )}
       </div>
     </>
   );
