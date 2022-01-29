@@ -1,4 +1,10 @@
 :root {
+  --bg-dark: #2e3440;
+  --bg-light: #fdebf7;
+  --text-white: #fff;
+  --text-dark: #000;
+  --placeholder-light: rgba(255, 255, 255, 0.65);
+  --placeholder-dark: rgba(0, 0, 0, 0.25);
   margin: 1rem;
   font-size: 16px;
   min-width: 300px;
@@ -8,8 +14,8 @@
   border-radius: 10px;
   text-overflow: ellipsis;
   overflow: scroll;
-  background-color: #2e3440;
-  color: #fff;
+  background-color: var(--bg-light);
+  color: var(--text-dark);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
@@ -21,8 +27,8 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-a{
-  color: #fff;
+a {
+  color: var(--text-white);
 }
 
 .apps {
@@ -32,23 +38,22 @@ a{
   align-items: stretch;
 }
 
-.feedback{
+.feedback {
   font-weight: bold;
 }
-.bad-feedback{
-  color: #FF4848;
+.bad-feedback {
+  color: #ff4848;
 }
-
 
 .app-card {
   display: flex;
-  background-color: #3b4252;  
+  background-color: var(--bg-light);
   justify-content: space-between;
   align-items: center;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin: .5rem;
-  padding: .75rem;
+  margin: 0.5rem;
+  padding: 0.75rem;
 }
 .app-card > h3 {
   margin-right: 10px;
@@ -63,16 +68,17 @@ a{
   margin: 0.5rem;
   background-color: #3b4252;
   outline: none;
-  color: #fff;
+  color: var(--text-dark);
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   font-size: 1rem;
 }
-.text-box::placeholder{
-  color: rgba(255, 255, 255, 0.65);
+.text-box::placeholder {
+  color: var(--placeholder-dark);
 }
 .text-box:focus {
-  box-shadow: rgba(40, 255, 191, 1) 0px 1px 4px, rgba(40, 255, 191, 1) 0px 0px 0px 3px;
+  box-shadow: rgba(40, 255, 191, 1) 0px 1px 4px,
+    rgba(40, 255, 191, 1) 0px 0px 0px 3px;
 }
 
 .btn {
@@ -84,15 +90,16 @@ a{
   padding: 1rem;
   margin: 0.5rem;
   font-size: 1rem;
-  color: #fff;
+  color: var(--text-white);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background: transparent;
   border-radius: 8px;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
-.btn:focus{
-  box-shadow: rgba(40, 255, 191, 1) 0px 1px 4px, rgba(40, 255, 191, 1) 0px 0px 0px 3px;
+.btn:focus {
+  box-shadow: rgba(40, 255, 191, 1) 0px 1px 4px,
+    rgba(40, 255, 191, 1) 0px 0px 0px 3px;
 }
 
 .login {
@@ -103,24 +110,24 @@ a{
   text-align: center;
 }
 
-.header{
+.header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 }
-.header > h3{
+.header > h3 {
   margin: 0rem;
 }
-.header-with-back{
+.header-with-back {
   justify-content: start;
 }
-.header-with-back > button{
+.header-with-back > button {
   margin-left: 5px;
   margin-right: 15px;
 }
 
-.icon-btn{
+.icon-btn {
   padding: 0rem;
 }
 
@@ -130,4 +137,23 @@ a{
   justify-content: center;
   align-items: stretch;
   text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+  }
+  .btn {
+    color: var(--text-white);
+  }
+  .text-box {
+    color: var(--text-white);
+  }
+  .text-box::placeholder {
+    color: var(--placeholder-light);
+  }
+  a {
+    color: var(--text-white);
+  }
 }
