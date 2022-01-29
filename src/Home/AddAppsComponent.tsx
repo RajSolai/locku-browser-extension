@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { IoIosArrowBack } from "react-icons/io";
+import { IoIosArrowBack, IoIosApps } from "react-icons/io";
+import Generator from "generate-password";
+import { BiShowAlt } from "react-icons/bi";
 import { useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
 import { user } from "../redux/reducers/userReducer";
@@ -14,6 +16,7 @@ const Addapps: React.FC<RouteComponentProps> = ({
   const [appName, setAppName] = useState("");
   const [appPassword, setAppPwd] = useState("");
   const [feedbackMessage, setFeedback] = useState("");
+  const [showPass, setShowPass] = useState(false);
 
   const appApp = async () => {
     const res = await encryptAddApp(appPassword, appName, email, password);
@@ -22,6 +25,18 @@ const Addapps: React.FC<RouteComponentProps> = ({
     } else {
       setFeedback("App addition Failed");
     }
+  };
+
+  const genPass = () => {
+    const strongPassword = Generator.generate({
+      length: 20,
+      numbers: true,
+      lowercase: true,
+      uppercase: true,
+      symbols: true,
+      excludeSimilarCharacters: true,
+    });
+    setAppPwd(strongPassword);
   };
 
   const navigateToHome = () => {
@@ -37,18 +52,33 @@ const Addapps: React.FC<RouteComponentProps> = ({
           </button>
           <h3>Add Apps</h3>
         </div>
-        <input
-          type="text"
-          onChange={(e) => setAppName(e.target.value)}
-          className="text-box"
-          placeholder="Enter the App Name"
-        />
-        <input
-          type="password"
-          onChange={(e) => setAppPwd(e.target.value)}
-          className="text-box"
-          placeholder="Enter the Login password"
-        />
+        <div className="pass-input">
+          <input
+            type="text"
+            onChange={(e) => setAppName(e.target.value)}
+            className="text-box"
+            placeholder="Enter the App Name"
+          />
+          <button className="show-btn">
+            <IoIosApps size={20} />
+          </button>
+        </div>
+
+        <div className="pass-input">
+          <input
+            type={showPass ? "text" : "password"}
+            value={appPassword}
+            onChange={(e) => setAppPwd(e.target.value)}
+            className="text-box"
+            placeholder="Enter the Login password"
+          />
+          <button onClick={() => setShowPass(!showPass)} className="show-btn">
+            <BiShowAlt size={20} />
+          </button>
+        </div>
+        <button className="btn" onClick={genPass}>
+          Generate Strong Password
+        </button>
         <button onClick={appApp} className="btn">
           Add App
         </button>
