@@ -33,7 +33,7 @@ const LoginComponent: React.FC<RouteComponentProps> = ({
       dispatch(userLogin(userObject));
       history.push("/home");
     } else {
-      setFeedback("Login failed, Check email and password");
+      setFeedback("Login failed, Check username and password");
     }
   };
 
@@ -59,7 +59,7 @@ const LoginComponent: React.FC<RouteComponentProps> = ({
               type="text"
               onChange={(e) => setMail(e.target.value)}
               className="text-box"
-              placeholder="Enter Email address"
+              placeholder="Enter Username"
             />
             <input
               type="password"

@@ -28,6 +28,7 @@ const RegisterComponent = () => {
     console.log(response);
     if (response.data === "user-registered") {
       history.push("/login");
+      return;
     }
   };
 
@@ -39,7 +40,7 @@ const RegisterComponent = () => {
           type="text"
           onChange={(e) => setEmail(e.target.value)}
           className="text-box"
-          placeholder="Enter Email address"
+          placeholder="Enter UserName"
         />
         <input
           type="password"
