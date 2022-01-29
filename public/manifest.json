@@ -1,14 +1,14 @@
 {
   "short_name": "Your Extension Name",
   "name": "Your Extension Name",
-  "icons": { "192": "logo192.png", "128": "logo512.png" },
+  "icons": { "32": "logo32.png", "48": "logo48.png" },
   "permissions": ["clipboardWrite"],
   "manifest_version": 2,
   "version": "0.0.1",
   "browser_action": {
     "default_icon": {
-      "19": "images/icon192.png",
-      "38": "images/icon192.png"
+      "32": "logo32.png",
+      "48": "logo48.png"
     },
     "default_popup": "index.html",
     "default_title": "Your Extension Name"
