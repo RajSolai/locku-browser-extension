@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import { IoIosArrowBack } from "react-icons/io";
 import { useSelector } from "react-redux";
 import { RouteComponentProps } from "react-router-dom";
@@ -13,14 +13,14 @@ const Addapps: React.FC<RouteComponentProps> = ({
   const password = useSelector((state: user) => state.password);
   const [appName, setAppName] = useState("");
   const [appPassword, setAppPwd] = useState("");
-  const feedBackRef = useRef(null);
+  const [feedbackMessage, setFeedback] = useState("");
 
   const appApp = async () => {
-    const res = encryptAddApp(appPassword, appName, email, password);
+    const res = await encryptAddApp(appPassword, appName, email, password);
     if (res) {
-      feedBackRef.current.innerHTML = "App added Successfully";
+      setFeedback("App added Successfully");
     } else {
-      feedBackRef.current.innerHTML = "App addition Failed";
+      setFeedback("App addition Failed");
     }
   };
 
@@ -52,7 +52,7 @@ const Addapps: React.FC<RouteComponentProps> = ({
         <button onClick={appApp} className="btn">
           Add App
         </button>
-        <p ref={feedBackRef}></p>
+        <p>{feedbackMessage}</p>
       </div>
     </>
   );
