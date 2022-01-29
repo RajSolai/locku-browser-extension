@@ -4,6 +4,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { user } from "../redux/reducers/userReducer";
 import { loadApps } from "../utils/getApps";
+import { app } from "../utils/types";
 
 const HomeComponent: React.FC<RouteComponentProps> = ({
   history,
@@ -23,7 +24,7 @@ const HomeComponent: React.FC<RouteComponentProps> = ({
     console.log(apps);
   };
 
-  const navigatePages = (appData) => {
+  const navigatePages = (appData: app) => {
     history.push("/password", { appData, change: "...location.state" });
   };
 
