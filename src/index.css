@@ -4,7 +4,7 @@
   --text-white: #fff;
   --text-dark: #000;
   --placeholder-light: rgba(255, 255, 255, 0.65);
-  --placeholder-dark: rgba(0, 0, 0, 0.25);
+  --placeholder-dark: rgba(0, 0, 0, 0.65);
   margin: 1rem;
   font-size: 16px;
   min-width: 280px;
