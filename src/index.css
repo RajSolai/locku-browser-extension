@@ -145,16 +145,20 @@ a {
     color: var(--text-white);
   }
   .btn {
-    color: var(--text-dark);
+    color: var(--text-white);
   }
   .text-box {
-    background-color: var(--bg-light);
+    background-color: var(--bg-dark);
     color: var(--text-white);
   }
   .text-box::placeholder {
     color: var(--placeholder-light);
   }
   a {
+    color: var(--text-white);
+  }
+  .app-card{
+    background-color: var(--bg-dark);
     color: var(--text-white);
   }
 }
