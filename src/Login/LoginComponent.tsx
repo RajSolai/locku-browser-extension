@@ -12,7 +12,7 @@ const LoginComponent: React.FC<RouteComponentProps> = ({
   const dispatch = useDispatch();
   const [password, setPasswd] = useState("");
   const [email, setMail] = useState("");
-  const feedbackRef = useRef(null);
+  const [feedback, setFeedback] = useState("");
 
   const login = async () => {
     const userData = {
@@ -30,7 +30,7 @@ const LoginComponent: React.FC<RouteComponentProps> = ({
       dispatch(userLogin(userObject));
       history.push("/home");
     } else {
-      feedbackRef.current.innerHTML = "Login failed, Check email and password";
+      setFeedback("Login failed, Check email and password");
     }
   };
 
@@ -53,7 +53,7 @@ const LoginComponent: React.FC<RouteComponentProps> = ({
         <button onClick={login} className="btn">
           Login
         </button>
-        <p className="feedback bad-feedback" ref={feedbackRef}></p>
+        <p className="feedback bad-feedback">{feedback}</p>
         <Link to="/register">New here ? Register now !</Link>
       </div>
     </>
